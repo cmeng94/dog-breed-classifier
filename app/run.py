@@ -1,13 +1,6 @@
-# import json
-# import plotly
-# import pandas as pd
-
-
 from flask import Flask
 from flask import render_template, request, jsonify
-# from plotly import graph_objects
 
-# import joblib
 import cv2
 import numpy as np
 from tqdm import tqdm
@@ -26,11 +19,7 @@ from dog_classifier import *
 app = Flask(__name__)
 
 
-# load model
-# model = joblib.load("../models/classifier.pkl")
-
-
-# index webpage displays cool visuals and receives user input text for model
+# index webpage of dog classifier app that receives user input image path for classification
 @app.route('/')
 @app.route('/index')
 def index():
@@ -38,13 +27,13 @@ def index():
     return render_template('master.html')
 
 
-# web page that handles user query and displays model results
+# web page that handles user query and displays classification results
 @app.route('/go')
 def go():
     # save user input in query
     img_path = request.args.get('query', '') 
 
-    # use model to predict classification for query
+    # use model to predict dog breed for query
     classification_result = classify_dog_breed(img_path)
 
     # This will render the go.html Please see that file. 
