@@ -8,7 +8,7 @@ from keras.layers import Dropout, Flatten, Dense
 from keras.layers import Conv2D, MaxPooling2D, GlobalAveragePooling2D, GlobalMaxPooling2D
 from keras.callbacks import ModelCheckpoint  
 from keras.preprocessing import image                  
-from keras.applications.resnet import ResNet50, preprocess_input, decode_predictions
+from keras.applications.resnet import ResNet50
 from keras.applications.inception_v3 import InceptionV3, preprocess_input
 
 def face_detector(img_path):
@@ -27,7 +27,7 @@ def face_detector(img_path):
     face_cascade = cv2.CascadeClassifier('../app_preparation/haarcascades/haarcascade_frontalface_alt.xml')
     faces = face_cascade.detectMultiScale(gray)
     return len(faces) > 0
-
+    
 
 def path_to_tensor(img_path):
 
@@ -57,7 +57,9 @@ def ResNet50_predict_labels(img_path):
     prediction vector by ResNet50 for image located at img_path
     '''
 
-    # returns prediction vector for image located at img_path
+    from keras.applications.resnet import preprocess_input, decode_predictions
+
+    # return prediction vector for image located at img_path
     img = preprocess_input(path_to_tensor(img_path))
     ResNet50_model_orig = ResNet50(weights='imagenet')
     return np.argmax(ResNet50_model_orig.predict(img))
