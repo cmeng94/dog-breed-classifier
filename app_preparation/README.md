@@ -6,4 +6,4 @@ The `dog_app.ipynb` file requires downloading data sets and bottleneck features 
 
 2. Download the [human dataset](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/lfw.zip). Unzip the folder and place its contents at location `path_to_dog_project/app_preparation/data/lfw`.
 
-3. Download the bottleneck features [DogVGG16Data.npz](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/DogVGG16Data.npz) and [DogInceptionV3Data.npz](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/DogInceptionV3Data.npz) and place then at folder `path_to_dog_project/app_preparation/bottleneck_features` 
+3. Download the bottleneck features [DogVGG16Data.npz](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/DogVGG16Data.npz) and [DogInceptionV3Data.npz](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/DogInceptionV3Data.npz) and place then at folder `path_to_dog_project/app_preparation/bottleneck_features`. 
