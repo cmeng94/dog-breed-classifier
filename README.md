@@ -40,7 +40,7 @@ The code is developed with Python 3.9 and is dependent on a number of python pac
 ```sh
 pip3 install -r requirements.txt
 ```
-Note that the installation of some Python packages is different for Apple M1 CPU. The user may follow the instructions in this [YouTube Video](https://youtu.be/_CO-ND1FTOU)
+Note that the installation of some Python packages is different for Apple M1 CPU. The user may follow the instructions in this [YouTube Video](https://youtu.be/_CO-ND1FTOU).
 
 ### Installation
 To run the code locally, create a copy of this GitHub repository by running the following code in terminal:
@@ -55,7 +55,8 @@ python3 run.py
 
 <a id='use'></a>
 ## 4. Web App Usage
-With the Web App running, the user can submit a path to an image for classification. ** Note that the user-supplied image must be located in the `app/static` folder ** for the app to run properly.
+With the Web App running, the user can submit a path to an image for classification. **Note that the user-supplied image must be located in the `app/static` folder for the app to run properly**.
+
  
 
 <a id='contact'></a>
