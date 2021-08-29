@@ -58,8 +58,7 @@ python3 run.py
 With the Web App running, the user can submit a path to an image for classification. **Note that the user-supplied image must be located in the `app/static` folder for the app to run properly.** For example,
 <img width="800" alt="screenshot2" src="https://user-images.githubusercontent.com/11303419/131237044-5a36e87f-5092-4db1-82bf-537d58a91ac4.png">
 The classification result is shown after clicking the `Classify Dog Breed` button:
-<img width="800" alt="screenshot3" src="https://user-images.githubusercontent.com/11303419/131237095-938fcefd-4f3f-48cc-8350-3c73bd308580.png">
-
+<img width="800" alt="screenshot3" src="https://user-images.githubusercontent.com/11303419/131237111-d162632e-32c7-46fc-99b1-3fcf5a43e0d1.png">
 
 
  
