@@ -9,9 +9,9 @@
             <p class="text-center"> Sorry, I can only classify a dog or a human! </p>
         {% else %}
             {% if classification_result[0]=='dog' %}
-                <p class="text-center"> I detect a/an {{ classification_result[1]|safe }} dog! </p>
+                <p class="text-center"> I detect a/an {{ classification_result[1]|safe }}! </p>
             {% else %}
-                <p class="text-center"> I detect a human face resembling a/an {{ classification_result[1]|safe }} dog! </p>
+                <p class="text-center"> I detect a human face resembling a/an {{ classification_result[1]|safe }}! </p>
             {% endif %}
         {% endif %}
         <div style="text-align: center;" class="mb-5">

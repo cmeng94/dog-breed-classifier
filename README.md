@@ -11,7 +11,7 @@
 
 <a id='intro'></a>
 ## 1. Project Description
-The goal of this project is to build a CNN for classifying the dog breed of a user-supplied image. The training data set contains 6680 dog images of 133 dog breeds. We use Transfer Learning on top of the pretrained [`InceptionV3`](https://cloud.google.com/tpu/docs/inception-v3-advanced) architecture to obtain a CNN for our dog breed classification purpose. The deliverable of this project is a Web App that is built upon the CNN model.
+The goal of this project is to build a CNN for classifying the dog breed of a user-supplied image. The training data set contains 6680 dog images of 133 dog breeds. We use Transfer Learning on top of the pretrained [`InceptionV3`](https://cloud.google.com/tpu/docs/inception-v3-advanced) architecture to obtain a CNN for our dog breed classification purpose. The classifier has **81.81%** accuracy on the testing data set. The deliverable of this project is a Web App that is built upon the CNN model.
 
 <img width="800" alt="screenshot1" src="https://user-images.githubusercontent.com/11303419/131235836-0e496cd9-0556-4ab8-8e8c-29d0ae4da98b.png">
 
