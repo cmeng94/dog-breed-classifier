@@ -9,9 +9,7 @@ from keras.layers import Conv2D, MaxPooling2D, GlobalAveragePooling2D, GlobalMax
 from keras.callbacks import ModelCheckpoint  
 from keras.preprocessing import image                  
 from keras.applications.resnet import ResNet50, preprocess_input, decode_predictions
-
-from extract_bottleneck_features import extract_InceptionV3
-
+from keras.applications.inception_v3 import InceptionV3, preprocess_input
 
 def face_detector(img_path):
 
@@ -96,6 +94,18 @@ def get_DL_model():
     DL_model.load_weights('../app_preparation/saved_models/weights.best.InceptionV3.hdf5')
     return DL_model
 
+def extract_InceptionV3(tensor):
+
+    '''
+    Input:
+    tensor: image processed by path_to_tensor
+
+    Output:
+    bottleneck feature transformed by InceptionV3
+    '''
+
+    return InceptionV3(weights='imagenet', include_top=False).predict(preprocess_input(tensor))
+
 def DL_predict_breed(img_path):
 
     '''
@@ -129,7 +139,7 @@ def classify_dog_breed(img_path):
     
     Output:
         - if a dog is detected in the image, the predicted breed is returned
-        - if a human is detected in the image, the resembling dog breed is returned
+        - else if a human is detected in the image, the resembling dog breed is returned
         - if neither is detected in the image, "neither" is returned
     '''
     

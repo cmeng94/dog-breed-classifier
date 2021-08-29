@@ -12,7 +12,6 @@ from keras.callbacks import ModelCheckpoint
 from keras.preprocessing import image                  
 from keras.applications.resnet import ResNet50, preprocess_input, decode_predictions
 
-from extract_bottleneck_features import extract_InceptionV3
 from dog_classifier import *
 
 
