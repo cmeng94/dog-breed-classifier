@@ -83,17 +83,27 @@ When using `Transfer Learning`, however, we not only need to resize the input da
 * **Justification**:
 
 * **Examples**:
-    | Maltese | Maltese | Maltese|
-    | - | - | - |
-    | <img src="app_preparation/images/my_maltese1.png" width="300">  |   <img src="app_preparation/images/my_maltese2.png" width="300"> | <img src="app_preparation/images/my_maltese3.png" width="300">
+    | Maltese | Maltese |
+    | - | - |
+    | <img src="app_preparation/images/my_maltese1.png" width="400">  |   <img src="app_preparation/images/my_maltese2.png" width="400"> |
+
+    | Maltese | Emoji |
+    | - | - |
+    | <img src="app_preparation/images/my_maltese3.png" width="400"> | <img src="app_preparation/images/emoji.png" width="400"> |
 
     | Human 1 | Human 2 |
     | - | - |
-    | <img src="app_preparation/images/human1.png" width="300">  |   <img src="app_preparation/images/human2.png" width="300"> |
+    | <img src="app_preparation/images/human1.png" width="400">  |   <img src="app_preparation/images/human2.png" width="400"> |
 
 <a id='conclusion'></a>
+It is very interesting that the model predicts both human faces to be Dachshund, and so is my dog in an Elizabeth colloar. My guess is that the model is inclined to classify images that do not look like typical dogs as Dachshunds.
+
 ## 5. Conclusion
 
 * **Reflection**:
 
-* **Improvement**:
+* **Improvement**: The outputs are not so different from what I expected. At an accuracy rate of nearly 82% percent, I did not expect the dog classification results to be perfect -- there might be nuances that the model cannot capture. Regarding classification results for human, there is no way to evaluate whether they are correct or not, only subjective opinions.
+To further improve the algorithm, there are a few things we could do:
+  - Balance the categories of the training set may further improve the model. The training data set is not well balanced for some breeds, e.g., there are only 31 samples of Yorkshire terrier, but 75 samples of Border collie. 
+  - Augment the training data set by adding synthetic data either through flipping images, adding noise, or other distortions. This will expose our model to more variations and generalize better on data it has not seen.
+  - Use a different dog detector. The current dog detector is ResNet50, which is trained on images of 1000 categories. The model may be too complex for the simple task of detecting a dog. 
