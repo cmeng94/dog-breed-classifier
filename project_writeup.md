@@ -32,16 +32,16 @@ The task of assigning breed to dogs from images is considered exceptionally chal
 
 It is not difficult to find other dog breed pairs with minimal inter-class variation (for instance, Curly-Coated Retrievers and American Water Spaniels).  
 
-Curly-Coated Retriever | American Water Spaniel
-- | -
-<img src="app_preparation/images/Curly-coated_retriever_03896.jpg" width="200"> | <img src="app_preparation/images/American_water_spaniel_00648.jpg" width="200">
+| Curly-Coated Retriever | American Water Spaniel |
+| - | - |
+| <img src="app_preparation/images/Curly-coated_retriever_03896.jpg" width="200"> | <img src="app_preparation/images/American_water_spaniel_00648.jpg" width="200"> |
 
 
 Likewise, recall that labradors come in yellow, chocolate, and black.  The vision-based algorithm will have to conquer this high intra-class variation to determine how to classify all of these different shades as the same breed.  
 
-Yellow Labrador | Chocolate Labrador | Black Labrador
-- | - | -
-<img src="app_preparation/images/Labrador_retriever_06457.jpg" width="150"> | <img src="app_preparation/images/Labrador_retriever_06455.jpg" width="220"> | <img src="app_preparation/images/Labrador_retriever_06449.jpg" width="200">
+| Yellow Labrador | Chocolate Labrador | Black Labrador |
+| - | - | - |
+| <img src="app_preparation/images/Labrador_retriever_06457.jpg" width="150"> | <img src="app_preparation/images/Labrador_retriever_06455.jpg" width="220"> | <img src="app_preparation/images/Labrador_retriever_06449.jpg" width="200"> |
 
 We also mention that random chance presents an exceptionally low bar: setting aside the fact that the classes are slightly imabalanced, a random guess will provide a correct answer roughly 1 in 133 times, which corresponds to an accuracy of less than 1%.  
 
