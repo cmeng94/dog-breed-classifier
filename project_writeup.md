@@ -11,7 +11,7 @@
 <a id='def'></a>
 ## 1. Project Definition
 
-* **Project Overview**: In this project, we build a model to process real-world, user-supplied images. Given an image of a dog, the algorithm will identify an estimate of the canine’s breed. If supplied an image of a human, the code will identify the resembling dog breed. The [dog dataset](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/dogImages.zip) that the model will be trained on is provided by Udacity, which contains dog image data of 133 dog breeds split to train, validation and testing sets.
+* **Project Overview**: In this project, we build an algorithm to process real-world, user-supplied images. Given an image of a dog, the algorithm will identify an estimate of the canine’s breed. If supplied an image of a human, the algorithm will identify the resembling dog breed. The [dog dataset](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/dogImages.zip) that the model will be trained on is provided by Udacity, which contains dog image data of 133 dog breeds split to train, validation and testing sets.
 
 * **Problem Statement**: The algorithm we develop consists of three parts: a dog detector, a human face detector and a dog breed classifier. While we can use existing methods for detecting dog and human face, we will build a CNN for the purpose of dog breed classification. There are two ways of building a CNN: 1) construct from scratch, and 2) use [Transfer Learning](https://en.wikipedia.org/wiki/Transfer_learning). Details of these two methods will be discussed later on.
 
@@ -22,7 +22,7 @@
 <a id='analysis'></a>
 ## 2. Exploratory Data Analysis
 
-The training data consists of `6680 dog images` belonging to `133 breeds`. Firstly, to learn whether the breeds are evenly distributed, we plot a histogram of breed frequencies. 
+The training data to build the CNN model consists of `6680 dog images` belonging to `133 breeds`. Firstly, to learn whether the breeds are evenly distributed, we plot a histogram of breed frequencies. 
 
 <img width="400" alt="breedfrequency" src="app_preparation/images/breed_frequency.png">
 
@@ -63,10 +63,19 @@ When using `Transfer Learning`, however, we not only need to resize the input da
     The second to last layer is a `global pooling layer`, which reduces the dimensionality of the data from 3d to 1d. This transforms the data in preparation for the very last fully connected (dense) layer. The last layer is a `fully connected layer`. We specify the output size to be 133 since we need to map the data to exactly 133 categories. We apply the `softmax` activation function. This needs to be the last step of the CNN since it normalizes the output of a network to a probability distribution over predicted output classes. The class with the highest probability will be the predicted class.  
 
 
-* **Refinement**: The model has only 4.3% testing accuracy when trained using 10 epochs. If we want to improve model accuracy, we need to increase model complexity and increase number of training epochs. Both of these requirement longer training time. An alternative we can consider is using `Transfer Learning`, which allows us to use pre-trained CNNs and train a few additional customized layers for our classficiation purpose. This greatly reduces training time. The idea is to first tranform training data to `bottleneck features` using the pre-trained CNN, and then feed these bottleneck features to train the additional customized layers, e.g., 
+* **Refinement**: The model has only 4.3% testing accuracy when trained using 10 epochs. If we want to improve model accuracy, we need to increase model complexity and increase number of training epochs. Both of these requirement longer training time. An alternative we can consider is using `Transfer Learning`, which allows us to use pre-trained CNNs and train a few additional customized layers for our classficiation purpose. This greatly reduces training time. The idea is to first tranform training data to `bottleneck features` using the pre-trained CNN, and then feed these bottleneck features to train the additional customized layers, e.g.,   
     <img src="app_preparation/images/model2.png" width="500">   
     The reasoning behind adding these layers is that in order to obtain class probabilities, we first need a global pooling layer to transform the 3D output to 1D, and then a fully connected layer with SoftMax activation to map to the 133 dog breed classes for probabilities.  
-    There are a number of pre-trained model we can use here, for example, [AlexNext, VGGNet, ResNet and Inception](https://towardsdatascience.com/the-w3h-of-alexnet-vggnet-resnet-and-inception-7baaaecccc96). In this project, we used both VGG16 and InceptionV3 to build transfer learning CNN models.
+    There are a number of pre-trained model we can use here, for example, [VGG16](https://keras.io/api/applications/vgg/#vgg16-function), [VGG19](https://keras.io/api/applications/vgg/#vgg19-function), [ResNet50](https://keras.io/api/applications/resnet/#resnet50-function), [InceptionV3](https://keras.io/api/applications/inceptionv3/), and [Xception](https://keras.io/api/applications/xception/). For a comparasion between these CNNS , you can check out [this blog post](https://towardsdatascience.com/the-w3h-of-alexnet-vggnet-resnet-and-inception-7baaaecccc96). In this project, we used both VGG16 and InceptionV3 to build transfer learning CNN models.
+
+* **Algorithm**: Remember that the CNN model is only one part of the algorithm that we are building. The algorithm also has a human face detector and a dog detector to process the input. Here is the outline of the algorithm:
+  * `If` dog is detected with dog detector: predict dog breed using CNN
+  * `Else if` human face is detected with human face detector: predict resembling dog breed using CNN
+  * `Else`: return error
+
+  The dog detector we employed is [ResNet50](https://keras.io/api/applications/resnet/#resnet50-function). If the predicted label of the input image is between 151 and 268 (inclusive), then we say the model detects a dog. The human face detector we used is a [Cascade Classifier](https://docs.opencv.org/3.4/db/d28/tutorial_cascade_classifier.html).
+
+        
 
 <a id='result'></a>
 ## 4. Results
@@ -82,15 +91,28 @@ When using `Transfer Learning`, however, we not only need to resize the input da
 
 * **Justification**:
 
-* **Examples**:
-    | Maltese | Maltese |
+* **Examples**: 
+  * Firstly, I want to test the algorithm on my own Maltese dog to see whether it can predict the breed correctly.
+    | My Maltese | My Maltese |
     | - | - |
     | <img src="app_preparation/images/my_maltese1.png" width="400">  |   <img src="app_preparation/images/my_maltese2.png" width="400"> |
 
-    | Maltese | Emoji |
+    For both photos, the algorithm is able to detect a dog. In the `left photo`, the code says my dog is a Bichon frise. Although the prediction is not correct, we do notice that at first sight the breed do look similar because of their white color. Although both are small dogs, Bichon frise is slightly larger and weighs about twice as Maltese. The size difference, however, is hard to be shown in photos.
+
+    The biggest difference between the breeds is with their hair. Bichon frise has dense curly hair. In general, the breed has shorter hair, which gives the dog a very spongy appearance if trimmed and treated. On the other hand, Maltese has smooth, thin and straight hair that can grow very long, as shown in the picture below. The majority of the Maltese images in the training set are similar to this picture.
+
+    | Bichon frise | Maltese |
+    | - | - |
+    | <img src="app_preparation/images/Bichon_frise.jpg" width="250"> | <img src="app_preparation/images/Maltese.jpg" width="280"> |
+
+    However, if Maltese hair is groomed and trimmed, such as in the photo of my dog on the left, the difference between Bichon frise and Maltese is no longer very obvious. In the `right photo`, however, my dog's hair is left ungroomed for a while, which makes my dog look similar to the Maltese images in the training set. This time, the model is able to correctly predict the breed.
+
+  * Next, I supply the model with another photo of my dog and a doge emoji. For both pictures, the algorithm is not able to detect a dog, i.e., ResNet50 does not label them as dogs so they are not passed to the CNN:
+    | My Maltese | Emoji |
     | - | - |
     | <img src="app_preparation/images/my_maltese3.png" width="400"> | <img src="app_preparation/images/emoji.png" width="400"> |
 
+  * Lastly, I am also interested in how the model performs on human photos. Therefore, I feed it with my own photo and my boyfriend's photo. The human face detector correctly detects faces, and the CNN says we both look like Dachshunds.
     | Human 1 | Human 2 |
     | - | - |
     | <img src="app_preparation/images/human1.png" width="400">  |   <img src="app_preparation/images/human2.png" width="400"> |
@@ -104,6 +126,6 @@ It is very interesting that the model predicts both human faces to be Dachshund,
 
 * **Improvement**: The outputs are not so different from what I expected. At an accuracy rate of nearly 82% percent, I did not expect the dog classification results to be perfect -- there might be nuances that the model cannot capture. Regarding classification results for human, there is no way to evaluate whether they are correct or not, only subjective opinions.
 To further improve the algorithm, there are a few things we could do:
-  - Balance the categories of the training set may further improve the model. The training data set is not well balanced for some breeds, e.g., there are only 31 samples of Yorkshire terrier, but 75 samples of Border collie. 
-  - Augment the training data set by adding synthetic data either through flipping images, adding noise, or other distortions. This will expose our model to more variations and generalize better on data it has not seen.
-  - Use a different dog detector. The current dog detector is ResNet50, which is trained on images of 1000 categories. The model may be too complex for the simple task of detecting a dog. 
+  * Balance the categories of the training set may further improve the model. The training data set is not well balanced for some breeds, e.g., there are only 31 samples of Yorkshire terrier, but 75 samples of Border collie. 
+  * Augment the training data set by adding synthetic data either through flipping images, adding noise, or other distortions. This will expose our model to more variations and generalize better on data it has not seen.
+  * Use a different dog detector. The current dog detector is ResNet50, which is trained on images of 1000 categories. The model may be too complex for the simple task of detecting a dog. 
