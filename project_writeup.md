@@ -22,9 +22,13 @@
 <a id='analysis'></a>
 ## 2. Exploratory Data Analysis
 
+The training data consists of 6680 dog images belonging to 133 breeds. Firstly, I am interested in learning whether the breeds are evenly distributed, so I plotted a histogram of breed frequencies.
+
 <img width="400" alt="breedfrequency" src="app_preparation/images/breed_frequency.png">
 
-The task of assigning breed to dogs from images is considered exceptionally challenging.  To see why, consider that *even a human* would have great difficulty in distinguishing between a Brittany and a Welsh Springer Spaniel.  
+It can be seen that the 133 breeds are not evenly distributed. The bin that has the most frequency is 50-55, i.e., around 27 breeds have between 50 and 55 images. The breed that has the least data is "Norwegian buhund", with 26 images, and the breed that has the most data is "Alaskan malamute", with 77 images.
+
+The task of assigning breed to dogs from images is considered exceptionally challenging.  To see why, consider that even a human would have great difficulty in distinguishing between a Brittany and a Welsh Springer Spaniel.  
 
 | Brittany | Welsh Springer Spaniel |
 | - | - |
