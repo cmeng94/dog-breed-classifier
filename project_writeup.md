@@ -16,7 +16,7 @@
 * **Problem Statement**: The algorithm we develop consists of three parts: a dog detector, a human face detector and a dog breed classifier. While we can use existing methods for detecting dog and human face, we will build a CNN for the purpose of dog breed classification. There are two ways of building a CNN: 1) construct from scratch, and 2) use [Transfer Learning](https://en.wikipedia.org/wiki/Transfer_learning). Details of these two methods will be discussed later on.
 
 
-* **Metrics**: We use accuracy score to measure the performance of our model, i.e., what percentage of data is correctly classified？ Since we are working on a multi-class classification problem with 133 classes, metrics that are frequently used for binary classification such as precision, recall and F1 score do not apply. Hence, we use the accuracy score only.
+* **Metrics**: We use accuracy score to measure the performance of our model, i.e., what percentage of data is correctly classified？ Since we are working on a multi-class classification problem with 133 classes, metrics that are frequently used for binary classification such as precision, recall and F1 score do not apply. Hence, we use the accuracy score only. When training the model, we minimize the [Cross-Entropy](https://en.wikipedia.org/wiki/Cross_entropy) loss function.
 
 
 <a id='analysis'></a>
@@ -56,7 +56,7 @@ We also mention that random chance presents an exceptionally low bar: setting as
 Note that we need to resize each input image to a square image that is `224 x 224` pixels, convert it to an array, which is then resized to a 4D tensor.  In this case, since we are working with color images, each image has three channels.  Likewise, since we are processing a single image (or sample), the resulting tensor will always have shape `(1, 224, 224, 3)`. If we stack all input images together, the resulting tensor will take the size `(nb_samples, 224, 224, 3)`.  
 When using `Transfer Learning`, however, we not only need to resize the input data as mentioned above, but also need to transfrom them into `bottleneck features`. In other words, we need to pass the resized data through the pre-trained neural network to obtain the output, i.e., the bottleneck features that are to be fed into newly added layers on top of the pre-trained model. 
 
-* **Implementation**: The first CNN model I built was created from scrach. When trained using 10 epochs with the [Adam](https://arxiv.org/abs/1412.6980) optimizer, this model gives a `4.3%` testing accuracy. The model architecture is shown below:  
+* **Implementation**: The first CNN model I built was created from scrach. When trained using 10 epochs with the [Adam](https://arxiv.org/abs/1412.6980) optimizer to minimize the `Cross-Entropy` loss, this model gives a `4.3%` testing accuracy. The model architecture is shown below:  
     <img src="app_preparation/images/model1.png" width="500">  
     In this CNN, the first layer is a `convolutional layer`, which extracts the various features from the input image. In this layer, 16 convolution kernels is applied to the input, and the output is referred to as the Feature Map. The convolutional layer is usually followed by a `pooling layer`, which is primarily used to decrease the size of the convolved feature map hence reducing computational costs. Pooling methods include average pooling (smoothing out the image) and max pooling (extracting brighter pixels).  
     We repeat the above combination of the two layers 3 times to extract more features and increase model complexity. Given complex training data, we need correspondingly complex CNN structure to guarantee accuracy. But increasing the depth of a CNN may also cause overfitting, so we need to be careful with adding layers. Since the objective for this step is to create a model that has >1% testing accuracy, a simple CNN model like this would suffice.  
@@ -72,6 +72,12 @@ When using `Transfer Learning`, however, we not only need to resize the input da
 ## 4. Results
 
 * **Model Evaluation and Validation**:
+    | | From Scratch | VGG16 TL | InceptionV3 TL
+    | - | - | - | - |
+    | Optimizer | Adam | Adam | Adam |
+    | Loss Function | Cross-Entropy | Cross-Entropy | Cross-Entropy |
+    | Number of Epochs | 10 | 20 | 20 |
+    | Testing Accuracy| 4.3062% | 69.3780% | 81.8182% |
 
 * **Justification**:
 
