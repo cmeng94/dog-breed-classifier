@@ -18,6 +18,7 @@ The goal of this project is to build a CNN for classifying the dog breed of a us
 
 <a id='files'></a>
 ## 2. File Descriptions
+* `project_writeup.md`: This file contains detailed descriptions of the project, as well as other important components such as data analysis, methodology, and results.
 * `app`: This folder contains the Web App. Its contents include:
 	- `run.py`: the main execution file for the Web App
 	- `dog_classifier.py`: python file with classification methods that are used when the Web App is run
