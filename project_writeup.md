@@ -11,7 +11,8 @@
 <a id='def'></a>
 ## 1. Project Definition
 
-* **Project Overview**: In this project, we build an algorithm to process real-world, user-supplied images. Given an image of a dog, the algorithm will identify an estimate of the canine’s breed. If supplied an image of a human, the algorithm will identify the resembling dog breed. The [dog dataset](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/dogImages.zip) that the model will be trained on is provided by Udacity, which contains dog image data of 133 dog breeds split to train, validation and testing sets.
+* **Project Overview**: In this project, we build an algorithm to process real-world, user-supplied images. Given an image of a dog, the algorithm will identify an estimate of the canine’s breed. If supplied an image of a human, the algorithm will identify the resembling dog breed.The [dog dataset](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/dogImages.zip) that the model will be trained on is provided by Udacity, which contains dog image data of 133 dog breeds split into train, validation and testing sets.  
+ This algorithm is used as part of the Web Application that you can find in the `app` folder. For details on how to run the Web App, please consult the `README.md` file.
 
 * **Problem Statement**: The algorithm we develop consists of three parts: a dog detector, a human face detector and a dog breed classifier. While we can use existing methods for detecting dog and human face, we need to build a CNN for the purpose of dog breed classification. There are two ways of building a CNN: 1) construct from scratch, and 2) use [Transfer Learning](https://en.wikipedia.org/wiki/Transfer_learning). Details of these two methods will be discussed later on.
 
@@ -121,7 +122,7 @@ When using `Transfer Learning`, however, we not only need to resize the input da
 <a id='conclusion'></a>
 ## 5. Conclusion
 
-* **Reflection**: 
+* **Reflection**: In this project, we have developed an algorithm that processes and anlyzes user-supplied image for the purpose of dog breed classification. If a dog is detected in the image, the algorithm uses a CNN trained using Transfer Learning to predict the dog breed. If a human face is detected, it returns the resembling dog breed predicted by the CNN. If neither is detected, the algorithm returns an error. I have found transfer learning particularly insteresting -- it is a very powerful method that allows us to make use of existing, well-performing models on a wide range of classification problems.
 
 * **Improvement**: The model output is not so different from what I expected. At an accuracy rate of nearly 82% percent, I did not expect the dog classification results to be perfect -- there might be nuances that the model cannot capture. Regarding classification results for human, there is no way to evaluate whether they are correct or not, only subjective opinions.
 To further improve the algorithm, there are a few things we could do:
