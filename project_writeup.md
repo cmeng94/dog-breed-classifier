@@ -26,9 +26,9 @@
 
 The task of assigning breed to dogs from images is considered exceptionally challenging.  To see why, consider that *even a human* would have great difficulty in distinguishing between a Brittany and a Welsh Springer Spaniel.  
 
-Brittany | Welsh Springer Spaniel
-- | - 
-<img src="app_preparation/images/Brittany_02625.jpg" width="100"> | <img src="app_preparation/images/Welsh_springer_spaniel_08203.jpg" width="200">
+| Brittany | Welsh Springer Spaniel |
+| - | - |
+| <img src="app_preparation/images/Brittany_02625.jpg" width="100"> | <img src="app_preparation/images/Welsh_springer_spaniel_08203.jpg" width="200"> |
 
 It is not difficult to find other dog breed pairs with minimal inter-class variation (for instance, Curly-Coated Retrievers and American Water Spaniels).  
 
