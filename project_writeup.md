@@ -87,6 +87,9 @@ When using `Transfer Learning`, however, we not only need to resize the input da
     | - | - | - |
     | <img src="app_preparation/images/my_maltese1.png" width="300">  |   <img src="app_preparation/images/my_maltese2.png" width="300"> | <img src="app_preparation/images/my_maltese3.png" width="300">
 
+    | Human 1 | Human 2 |
+    | - | - |
+    | <img src="app_preparation/images/human1.png" width="300">  |   <img src="app_preparation/images/human2.png" width="300"> |
 
 <a id='conclusion'></a>
 ## 5. Conclusion
